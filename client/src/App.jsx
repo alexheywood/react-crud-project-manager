@@ -21,7 +21,6 @@ function App() {
           <Route path='/process/:id' element={<Process />}></Route>
         </Routes>
       </BrowserRouter >
-      <Footer />
     </>
   )
 }

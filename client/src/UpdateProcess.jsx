@@ -9,12 +9,14 @@ export default function UpdateProcess() {
     const [description, setDescription] = useState('');
     const [serviceArea, setServiceArea] = useState('');
     const [owner, setOwner] = useState('');
-    const [hasBuild, setHasBuild] = useState();
-    const [hasTests, setHasTests] = useState();
-    const [hasContent, setHasContent] = useState();
-    const [hasTranslation, setHasTranslation] = useState();
-    const [passedVerify, setPassedVerify] = useState();
-    const [hasMigrated, setHasMigrated] = useState();
+    const [url, setUrl] = useState('')
+    const [hasDiscovery, setHasDiscovery] = useState(false);
+    const [hasBuild, setHasBuild] = useState(false);
+    const [hasTests, setHasTests] = useState(false);
+    const [hasContent, setHasContent] = useState(false);
+    const [hasTranslation, setHasTranslation] = useState(false);
+    const [passedVerify, setPassedVerify] = useState(false);
+    const [hasMigrated, setHasMigrated] = useState(false);
 
     const navigate = useNavigate();
 
@@ -26,6 +28,8 @@ export default function UpdateProcess() {
                 setDescription(res.data.description)
                 setServiceArea(res.data.serviceArea)
                 setOwner(res.data.owner)
+                setUrl(res.data.url)
+                setHasDiscovery(res.data.hasDiscovery)
                 setHasBuild(res.data.hasBuild)
                 setHasTests(res.data.hasTests)
                 setHasContent(res.data.hasContent)
@@ -37,61 +41,145 @@ export default function UpdateProcess() {
 
     }, [])
 
-    function updateData(e) {
-        e.preventDefault();
-        axios.put("http://localhost:3001/updateProcess/" + id, { name, description, serviceArea, owner, hasBuild, hasTests, hasContent, hasTranslation, passedVerify, hasMigrated })
-            .then(res => {
-                console.log(res)
-                navigate('/')
+    function updateData() {
+        axios.post("http://localhost:3001/updateProcess/" + id,
+            {
+                name,
+                description,
+                serviceArea,
+                owner,
+                url,
+                hasDiscovery,
+                hasBuild,
+                hasTests,
+                hasContent,
+                hasTranslation,
+                passedVerify,
+                hasMigrated
+            }).then(result => {
+                console.log(result)
             })
-            .catch(err => res.json(err))
+            .catch(err => {
+                console.log(err)
+            }
+            )
     }
 
 
     return (
-        <div className="container min-vh-100 mt-5 w-md-50">
-            <form onSubmit={updateData} className="w-md-50">
-                <h1>Update Process</h1>
-                <div className="mb-2">
-                    <label htmlFor="">Name:</label>
-                    <input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Process Name" className="form-control"></input>
-                </div>
-                <div className="mb-2">
-                    <label htmlFor="">Description:</label>
-                    <input value={description} onChange={(e) => setDescription(e.target.value)} type="text" placeholder="Process Description" className="form-control"></input>
-                </div>
-                <div className="mb-2">
-                    <label htmlFor="">Owner:</label>
-                    <input value={owner} onChange={(e) => setOwner(e.target.value)} type="text" placeholder="Process Owner" className="form-control"></input>
-                </div>
+        <form onSubmit={updateData}>
+            <div className="container">
+                <div className="row">
+                    <div className="mt-5 col-12 col-md-6">
+                        <h1>Update</h1>
+                        <div className="w-100">
+                            <div className="mb-2">
+                                <label htmlFor="name">Name:</label>
+                                <input required onChange={(e) => setName(e.target.value)} value={name} id="name" type="text" placeholder="Process Name" className="form-control"></input>
+                            </div>
+                            <div className="mb-2">
+                                <label htmlFor="description">Description:</label>
+                                <input required onChange={(e) => setDescription(e.target.value)} value={description} id="description" type="text" placeholder="Process Description" className="form-control"></input>
+                            </div>
+                            <div className="mb-2">
+                                <label htmlFor="url">URL:</label>
+                                <input onChange={(e) => setUrl(e.target.value)} type="text" id="url" value={url} placeholder="Granicus Form URL" className="form-control"></input>
+                            </div>
+                            <div className="mb-2">
+                                <label htmlFor="owner">Owner:</label>
+                                <input required onChange={(e) => setOwner(e.target.value)} id="owner" value={owner} type="text" placeholder="Process Owner" className="form-control"></input>
+                            </div>
+                            <div className="mb-2">
+                                <label className="d-block" htmlFor="">Service Area:</label>
+                                <select required onChange={(e) => setServiceArea(e.target.value)} value={serviceArea} className="w-100 p-1 rounded">
+                                    <option value="C1V">C1V</option>
+                                    <option value="Highways Management">Highways Maintenance</option>
+                                    <option value="Waste Management">Waste Management</option>
+                                    <option value="Benefits">Benefits</option>
+                                    <option value="Council Tax">Council Tax</option>
+                                    <option value="Social Services">Social Services</option>
+                                    <option value="Enforcement">Enforcement</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="mt-5 col-12 col-md-6">
 
-                <div className="mb-2">
-                    <label className="d-block" htmlFor="">Service Area:</label>
-                    <select value={serviceArea} className="w-100 p-1 rounded" onChange={(e) => setServiceArea(e.target.value)}>
-                        <option value="C1V">C1V</option>
-                        <option value="Highways Management">Highways Maintenance</option>
-                        <option value="Waste Management">Waste Management</option>
-                        <option value="Benefits">Benefits</option>
-                        <option value="Council Tax">Council Tax</option>
-                        <option value="Social Services">Social Services</option>
-                        <option value="Enforcement">Enforcement</option>
-                    </select>
-                </div>
-                <h3>Checklist:</h3>
-                <div className="mb-2">
-                    <label htmlFor="hasBuild">Build completed?</label>
-                    <div className="form-check">
-                        <input onChange={(e) => setHasBuild(e.target.value)} className="form-check-input" type="checkbox" id="hasBuild" name="Yes" value={true}></input>
-                        <label className="form-check-label">Yes</label>
+                        <h3 className="mt-0 mt-md-5">Checklist:</h3>
+                        <small className="">Please check any actions that have already been completed:</small>
+                        <hr />
+                        <div className="mb-2">
+                            <input
+                                type="checkbox"
+                                id="hasDiscovery"
+                                checked={hasDiscovery}
+                                onChange={(e) => setHasDiscovery(e.target.checked)}
+                            />
+                            <label className="mx-2" htmlFor="hasDiscovery">Discovery completed</label>
+                        </div>
+                        <div className="mb-2">
+                            <input
+                                type="checkbox"
+                                id="hasBuild"
+                                onChange={(e) => setHasBuild(e.target.checked)}
+                                checked={hasBuild}
+                            />
+                            <label className="mx-2" htmlFor="hasTests">Process built</label>
+                        </div>
+                        <div className="mb-2">
+                            <input
+                                type="checkbox"
+                                id="hasTests"
+                                onChange={(e) => setHasTests(e.target.checked)}
+                                checked={hasTests}
+                            />
+                            <label className="mx-2" htmlFor="hasTests">Tests completed</label>
+                        </div>
+                        <div className="mb-2">
+                            <input
+                                type="checkbox"
+                                id="hasContent"
+                                onChange={(e) => setHasContent(e.target.checked)}
+                                checked={hasContent}
+                            />
+                            <label className="mx-2" htmlFor="hasContent">Content confirmed</label>
+                        </div>
+                        <div className="mb-2">
+                            <input
+                                type="checkbox"
+                                id="hasTranslation"
+                                checked={hasTranslation}
+                                onChange={(e) => setHasTranslation(e.target.checked)}
+                            />
+                            <label className="mx-2" htmlFor="hasTranslation">Translation confirmed</label>
+                        </div>
+                        <div className="mb-2">
+                            <input
+                                type="checkbox"
+                                id="passedVerify"
+                                checked={passedVerify}
+                                onChange={(e) => setPassedVerify(e.target.checked)}
+                            />
+                            <label className="mx-2" htmlFor="passedVerify">Passed verification scripts</label>
+                        </div>
+                        <div className="mb-2">
+                            <input
+                                type="checkbox"
+                                id="hasMigrated"
+                                checked={hasMigrated}
+                                onChange={(e) => setHasMigrated(e.target.checked)}
+                            />
+                            <label className="mx-2" htmlFor="hasMigrated">Successfully migrated</label>
+                        </div>
+                    </div>
+
+
+                    <div className="d-flex my-3">
+                        <Link to="/" className="btn btn-danger">Cancel</Link>
+                        <button className="btn btn-large btn-success mx-2" type="submit">Submit</button>
                     </div>
                 </div>
-
-                <div className="d-flex mt-3">
-                    <Link to="/" className="btn btn-danger">Cancel</Link>
-                    <button className="btn btn-large btn-success mx-2" type="submit">Submit</button>
-
-                </div>
-            </form >
-        </div >
+            </div>
+        </form >
     )
 }

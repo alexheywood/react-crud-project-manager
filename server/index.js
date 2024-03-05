@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config()
 const ProcessModel = require('./models/Processes');
-const processModel = require('./models/Processes');
 
 
 const app = express();
@@ -61,12 +60,23 @@ app.get('/getProcess/:id', (req, res) => {
 app.put('/updateProcess/:id', (req, res) => {
     const id = req.params.id;
 
+
     ProcessModel.findByIdAndUpdate({ _id: id },
         {
             name: req.body.name,
             description: req.body.description,
-            serviceArea: req.body.serviceArea
+            serviceArea: req.body.serviceArea,
+            owner: req.body.owner,
+            url: req.body.url,
+            hasDiscovery: req.body.hasDiscovery,
+            hasBuild: req.body.hasBuild,
+            hasTests: req.body.hasTests,
+            hasContent: req.body.hasContent,
+            hasTranslation: req.body.hasTranslation,
+            passedVerify: req.body.passedVerify,
+            hasMigrated: req.body.hasMigrated
         })
+
         .then(process => {
             res.json(process)
         })

@@ -44,7 +44,7 @@ export default function UpdateProcess() {
 
 
     return (
-        <div className="container w-75">
+        <div className="container w-100">
             <div className="container-md h-auto my-5">
                 <Link className="mb-2" to="/" alt="Go back"><BsArrowLeftSquareFill size={30} /></Link>
                 <Link to={`/update/${id}`} className="btn btn-success mx-4 btn-sm">Update</Link>
