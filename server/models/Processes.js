@@ -13,6 +13,7 @@ const processSchema = new mongoose.Schema({
     hasTranslation: Boolean,
     passedVerify: Boolean,
     hasMigrated: Boolean,
+    complete: Boolean,
 
 })
 

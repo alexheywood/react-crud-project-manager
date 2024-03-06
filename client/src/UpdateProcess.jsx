@@ -17,6 +17,7 @@ export default function UpdateProcess() {
     const [hasTranslation, setHasTranslation] = useState(false);
     const [passedVerify, setPassedVerify] = useState(false);
     const [hasMigrated, setHasMigrated] = useState(false);
+    const [complete, setComplete] = useState(false)
 
     const navigate = useNavigate();
 
@@ -32,38 +33,26 @@ export default function UpdateProcess() {
                 setHasDiscovery(res.data.hasDiscovery)
                 setHasBuild(res.data.hasBuild)
                 setHasTests(res.data.hasTests)
-                setHasContent(res.data.hasContent)
+                setHasContent(res.data.hasContent || false)
                 setHasTranslation(res.data.hasTranslation)
                 setPassedVerify(res.data.passedVerify)
                 setHasMigrated(res.data.hasMigrated)
-            })
-            .catch(err => console.log(err))
-
+                setComplete(res.data.complete)
+            }).catch(err => console.log(err))
     }, [])
 
-    function updateData() {
-        axios.post("http://localhost:3001/updateProcess/" + id,
-            {
-                name,
-                description,
-                serviceArea,
-                owner,
-                url,
-                hasDiscovery,
-                hasBuild,
-                hasTests,
-                hasContent,
-                hasTranslation,
-                passedVerify,
-                hasMigrated
-            }).then(result => {
-                console.log(result)
+
+
+    function updateData(e) {
+        e.preventDefault();
+        axios.put("http://localhost:3001/updateProcess/" + id, { name, description, serviceArea, owner, hasDiscovery, hasBuild, hasTests, hasContent, hasTranslation, passedVerify, hasMigrated, complete })
+            .then(res => {
+                console.log(res)
             })
-            .catch(err => {
-                console.log(err)
-            }
-            )
+            .catch(err => res.json(err))
     }
+
+
 
 
     return (
@@ -75,23 +64,34 @@ export default function UpdateProcess() {
                         <div className="w-100">
                             <div className="mb-2">
                                 <label htmlFor="name">Name:</label>
-                                <input required onChange={(e) => setName(e.target.value)} value={name} id="name" type="text" placeholder="Process Name" className="form-control"></input>
+                                <input required onChange={(e) => {
+                                    setName(e.target.value)
+                                }} value={name} id="name" type="text" placeholder="Process Name" className="form-control"></input>
                             </div>
                             <div className="mb-2">
                                 <label htmlFor="description">Description:</label>
-                                <input required onChange={(e) => setDescription(e.target.value)} value={description} id="description" type="text" placeholder="Process Description" className="form-control"></input>
+                                <input required onChange={(e) => {
+                                    setDescription(e.target.value)
+                                }}
+                                    value={description} id="description" type="text" placeholder="Process Description" className="form-control"></input>
                             </div>
                             <div className="mb-2">
                                 <label htmlFor="url">URL:</label>
-                                <input onChange={(e) => setUrl(e.target.value)} type="text" id="url" value={url} placeholder="Granicus Form URL" className="form-control"></input>
+                                <input onChange={(e) => {
+                                    setUrl(e.target.value)
+                                }} type="text" id="url" value={url} placeholder="Granicus Form URL" className="form-control"></input>
                             </div>
                             <div className="mb-2">
                                 <label htmlFor="owner">Owner:</label>
-                                <input required onChange={(e) => setOwner(e.target.value)} id="owner" value={owner} type="text" placeholder="Process Owner" className="form-control"></input>
+                                <input required onChange={(e) => {
+                                    setOwner(e.target.value)
+                                }} id="owner" value={owner} type="text" placeholder="Process Owner" className="form-control"></input>
                             </div>
                             <div className="mb-2">
                                 <label className="d-block" htmlFor="">Service Area:</label>
-                                <select required onChange={(e) => setServiceArea(e.target.value)} value={serviceArea} className="w-100 p-1 rounded">
+                                <select required onChange={(e) => {
+                                    setServiceArea(e.target.value)
+                                }} value={serviceArea} className="w-100 p-1 rounded">
                                     <option value="C1V">C1V</option>
                                     <option value="Highways Management">Highways Maintenance</option>
                                     <option value="Waste Management">Waste Management</option>
@@ -106,14 +106,16 @@ export default function UpdateProcess() {
                     <div className="mt-5 col-12 col-md-6">
 
                         <h3 className="mt-0 mt-md-5">Checklist:</h3>
-                        <small className="">Please check any actions that have already been completed:</small>
+                        <small className="">Please check any actions that have been completed:</small>
                         <hr />
                         <div className="mb-2">
                             <input
                                 type="checkbox"
                                 id="hasDiscovery"
                                 checked={hasDiscovery}
-                                onChange={(e) => setHasDiscovery(e.target.checked)}
+                                onChange={(e) => {
+                                    setHasDiscovery(e.target.checked)
+                                }}
                             />
                             <label className="mx-2" htmlFor="hasDiscovery">Discovery completed</label>
                         </div>
@@ -121,7 +123,10 @@ export default function UpdateProcess() {
                             <input
                                 type="checkbox"
                                 id="hasBuild"
-                                onChange={(e) => setHasBuild(e.target.checked)}
+                                onChange={(e) => {
+                                    setHasBuild(e.target.checked)
+                                }
+                                }
                                 checked={hasBuild}
                             />
                             <label className="mx-2" htmlFor="hasTests">Process built</label>
@@ -130,7 +135,9 @@ export default function UpdateProcess() {
                             <input
                                 type="checkbox"
                                 id="hasTests"
-                                onChange={(e) => setHasTests(e.target.checked)}
+                                onChange={(e) => {
+                                    setHasTests(e.target.checked)
+                                }}
                                 checked={hasTests}
                             />
                             <label className="mx-2" htmlFor="hasTests">Tests completed</label>
@@ -139,7 +146,9 @@ export default function UpdateProcess() {
                             <input
                                 type="checkbox"
                                 id="hasContent"
-                                onChange={(e) => setHasContent(e.target.checked)}
+                                onChange={(e) => {
+                                    setHasContent(e.target.checked)
+                                }}
                                 checked={hasContent}
                             />
                             <label className="mx-2" htmlFor="hasContent">Content confirmed</label>
@@ -149,7 +158,9 @@ export default function UpdateProcess() {
                                 type="checkbox"
                                 id="hasTranslation"
                                 checked={hasTranslation}
-                                onChange={(e) => setHasTranslation(e.target.checked)}
+                                onChange={(e) => {
+                                    setHasTranslation(e.target.checked)
+                                }}
                             />
                             <label className="mx-2" htmlFor="hasTranslation">Translation confirmed</label>
                         </div>
@@ -158,7 +169,9 @@ export default function UpdateProcess() {
                                 type="checkbox"
                                 id="passedVerify"
                                 checked={passedVerify}
-                                onChange={(e) => setPassedVerify(e.target.checked)}
+                                onChange={(e) => {
+                                    setPassedVerify(e.target.checked)
+                                }}
                             />
                             <label className="mx-2" htmlFor="passedVerify">Passed verification scripts</label>
                         </div>
@@ -167,7 +180,9 @@ export default function UpdateProcess() {
                                 type="checkbox"
                                 id="hasMigrated"
                                 checked={hasMigrated}
-                                onChange={(e) => setHasMigrated(e.target.checked)}
+                                onChange={(e) => {
+                                    setHasMigrated(e.target.checked)
+                                }}
                             />
                             <label className="mx-2" htmlFor="hasMigrated">Successfully migrated</label>
                         </div>

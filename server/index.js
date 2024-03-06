@@ -41,7 +41,7 @@ app.post("/create", (req, res) => {
 //GET ALL ENTRIES
 
 app.get('/', (req, res) => {
-    processModel.find({}).
+    ProcessModel.find({}).
         then(processes => res.json(processes))
         .catch(err => res.json(err))
 })
@@ -60,7 +60,6 @@ app.get('/getProcess/:id', (req, res) => {
 app.put('/updateProcess/:id', (req, res) => {
     const id = req.params.id;
 
-
     ProcessModel.findByIdAndUpdate({ _id: id },
         {
             name: req.body.name,
@@ -74,9 +73,9 @@ app.put('/updateProcess/:id', (req, res) => {
             hasContent: req.body.hasContent,
             hasTranslation: req.body.hasTranslation,
             passedVerify: req.body.passedVerify,
-            hasMigrated: req.body.hasMigrated
+            hasMigrated: req.body.hasMigrated,
+            complete: req.body.completed
         })
-
         .then(process => {
             res.json(process)
         })

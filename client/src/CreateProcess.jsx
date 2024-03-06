@@ -18,6 +18,7 @@ export default function CreateProcess() {
     const [hasTranslation, setHasTranslation] = useState(false);
     const [passedVerify, setPassedVerify] = useState(false);
     const [hasMigrated, setHasMigrated] = useState(false)
+    const [completed, setCompleted] = useState(false);
 
 
     const navigate = useNavigate();
@@ -38,7 +39,8 @@ export default function CreateProcess() {
                 hasContent,
                 hasTranslation,
                 passedVerify,
-                hasMigrated
+                hasMigrated,
+                completed
             }).then(result => {
                 console.log(result)
                 navigate('/')
@@ -147,6 +149,8 @@ export default function CreateProcess() {
                             <label className="mx-2" htmlFor="hasMigrated">Successfully migrated</label>
                         </div>
                     </div>
+
+
 
 
                     <div className="d-flex my-3">

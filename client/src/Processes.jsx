@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { BsCheckCircleFill } from "react-icons/bs";
+import { BsFillXCircleFill } from "react-icons/bs";
 
 export default function Processes() {
 
@@ -36,7 +38,7 @@ export default function Processes() {
     return (
         <>
 
-            <div className="container vh-100">
+            <div className="container-lg vh-100">
                 <div className="bg-white rounded">
                     <h1 className='mt-5'>Process List</h1>
                     <Link to="/create" className="btn btn-primary my-3">Create New</Link>
@@ -46,6 +48,7 @@ export default function Processes() {
                                 <th className="col-2">Name</th>
                                 <th className="col-2">Description</th>
                                 <th className="col-2">Service Area</th>
+                                <th className="col-1 text-center">Status</th>
                                 <th className="col-2 text-center">Actions</th>
                             </tr>
                         </thead>
@@ -58,6 +61,7 @@ export default function Processes() {
                                             <td><strong><Link className="text-black" to={`/process/${process._id}`}>{process.name}</Link></strong></td>
                                             <td>{process.description}</td>
                                             <td>{process.serviceArea}</td>
+                                            <td className="text-center">{process.complete ? <BsCheckCircleFill color='green' /> : <BsFillXCircleFill color='red' />} </td>
                                             <td className="my-3 text-center">
                                                 <Link to={`/update/${process._id}`} className="my-md-0 my-3 btn btn-success mx-sm-1 mx-lg-3">Update</Link>
                                                 <button onClick={(e) => handleDelete(process._id)} className="btn btn-danger">Delete</button>

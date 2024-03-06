@@ -37,6 +37,7 @@ export default function UpdateProcess() {
                 setPassedVerify(res.data.passedVerify)
                 setHasMigrated(res.data.hasMigrated)
                 setUrl(res.data.url)
+
             })
             .catch(err => console.log(err))
 
