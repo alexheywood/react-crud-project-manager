@@ -14,7 +14,7 @@ Main features:
 Clone the project
 
 ```bash
-  git clone [url]
+  git clone https://stitchbird.valeofglamorgan.gov.uk/default/internal-apps/_git/granicus-checker
 ```
 
 Go to the project directory
