@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BsCheckCircleFill } from "react-icons/bs";
 import { BsFillXCircleFill } from "react-icons/bs";
+import { MdModeEdit } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
 
 export default function Processes() {
 
@@ -38,7 +40,7 @@ export default function Processes() {
     return (
         <>
 
-            <div className="container-lg vh-100">
+            <div className="container vh-50">
                 <div className="bg-white rounded">
                     <h1 className='mt-5'>Process List</h1>
                     <Link to="/create" className="btn btn-primary my-3">Create New</Link>
@@ -63,8 +65,8 @@ export default function Processes() {
                                             <td>{process.serviceArea}</td>
                                             <td className="text-center">{process.complete ? <BsCheckCircleFill color='green' /> : <BsFillXCircleFill color='red' />} </td>
                                             <td className="my-3 text-center">
-                                                <Link to={`/update/${process._id}`} className="my-md-0 my-3 btn btn-success mx-sm-1 mx-lg-3">Update</Link>
-                                                <button onClick={(e) => handleDelete(process._id)} className="btn btn-danger">Delete</button>
+                                                <Link to={`/update/${process._id}`} className="my-md-0 my-3 mx-sm-1 mx-lg-3"><MdModeEdit size={20} /></Link>
+                                                <button className="btn" onClick={(e) => handleDelete(process._id)}><MdDeleteForever color='red' size={22} /></button>
                                             </td>
                                         </tr>
                                     )

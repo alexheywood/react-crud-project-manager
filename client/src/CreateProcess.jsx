@@ -10,7 +10,6 @@ export default function CreateProcess() {
     const [description, setDescription] = useState('');
     const [serviceArea, setServiceArea] = useState('');
     const [owner, setOwner] = useState('');
-    const [url, setUrl] = useState('');
     const [hasDiscovery, setHasDiscovery] = useState(false);
     const [hasBuild, setHasBuild] = useState(false);
     const [hasTests, setHasTests] = useState(false);
@@ -18,13 +17,14 @@ export default function CreateProcess() {
     const [hasTranslation, setHasTranslation] = useState(false);
     const [passedVerify, setPassedVerify] = useState(false);
     const [hasMigrated, setHasMigrated] = useState(false)
-    const [completed, setCompleted] = useState(false);
 
 
     const navigate = useNavigate();
 
 
-    function submitData() {
+    function submitData(event) {
+
+        event.preventDefault()
 
         axios.post("http://localhost:3001/create",
             {
@@ -32,7 +32,6 @@ export default function CreateProcess() {
                 description,
                 serviceArea,
                 owner,
-                url,
                 hasDiscovery,
                 hasBuild,
                 hasTests,
@@ -40,7 +39,6 @@ export default function CreateProcess() {
                 hasTranslation,
                 passedVerify,
                 hasMigrated,
-                completed
             }).then(result => {
                 console.log(result)
                 navigate('/')
@@ -65,10 +63,10 @@ export default function CreateProcess() {
                                 <label htmlFor="description">Description:</label>
                                 <input required onChange={(e) => setDescription(e.target.value)} id="description" type="text" placeholder="Process Description" className="form-control"></input>
                             </div>
-                            <div className="mb-2">
+                            {/* <div className="mb-2">
                                 <label htmlFor="url">URL:</label>
                                 <input onChange={(e) => setUrl(e.target.value)} type="text" id="url" placeholder="Granicus Form URL" className="form-control"></input>
-                            </div>
+                            </div> */}
                             <div className="mb-2">
                                 <label htmlFor="owner">Owner:</label>
                                 <input required onChange={(e) => setOwner(e.target.value)} id="owner" type="text" placeholder="Process Owner" className="form-control"></input>

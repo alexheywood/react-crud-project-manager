@@ -1,10 +1,10 @@
-import logo from '../public/logo.jpg'
+import logo from '/logo.jpg'
 
 export default function Footer() {
 
     return (
-        <footer className="navbar-fixed-bottom bg-light py-4 border-top text-center justify-content-center">
-            <small>Vale of Glamorgan Council</small>
-        </footer>
+        <nav className="navbar fixed-bottom navbar-light bg-light text-center justify-content-center">
+            <small><a className="navbar-brand" href="#">Vale of Glamorgan Council</a></small>
+        </nav>
     )
 }

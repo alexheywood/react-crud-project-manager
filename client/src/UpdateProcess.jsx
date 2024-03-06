@@ -17,7 +17,6 @@ export default function UpdateProcess() {
     const [hasTranslation, setHasTranslation] = useState(false);
     const [passedVerify, setPassedVerify] = useState(false);
     const [hasMigrated, setHasMigrated] = useState(false);
-    const [complete, setComplete] = useState(false)
 
     const navigate = useNavigate();
 
@@ -37,17 +36,29 @@ export default function UpdateProcess() {
                 setHasTranslation(res.data.hasTranslation)
                 setPassedVerify(res.data.passedVerify)
                 setHasMigrated(res.data.hasMigrated)
-                setComplete(res.data.complete)
+
             }).catch(err => console.log(err))
     }, [])
 
 
-
     function updateData(e) {
         e.preventDefault();
-        axios.put("http://localhost:3001/updateProcess/" + id, { name, description, serviceArea, owner, hasDiscovery, hasBuild, hasTests, hasContent, hasTranslation, passedVerify, hasMigrated, complete })
+        axios.put("http://localhost:3001/updateProcess/" + id, {
+            name,
+            description,
+            serviceArea,
+            owner,
+            hasDiscovery,
+            hasBuild,
+            hasTests,
+            hasContent,
+            hasTranslation,
+            passedVerify,
+            hasMigrated
+        })
             .then(res => {
                 console.log(res)
+                navigate('/')
             })
             .catch(err => res.json(err))
     }
@@ -74,12 +85,6 @@ export default function UpdateProcess() {
                                     setDescription(e.target.value)
                                 }}
                                     value={description} id="description" type="text" placeholder="Process Description" className="form-control"></input>
-                            </div>
-                            <div className="mb-2">
-                                <label htmlFor="url">URL:</label>
-                                <input onChange={(e) => {
-                                    setUrl(e.target.value)
-                                }} type="text" id="url" value={url} placeholder="Granicus Form URL" className="form-control"></input>
                             </div>
                             <div className="mb-2">
                                 <label htmlFor="owner">Owner:</label>

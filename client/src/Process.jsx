@@ -5,7 +5,7 @@ import { BsArrowLeftSquareFill } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { BsFillXCircleFill } from "react-icons/bs";
 
-export default function UpdateProcess() {
+export default function Process() {
 
     const { id } = useParams();
     const [name, setName] = useState('');
@@ -18,7 +18,6 @@ export default function UpdateProcess() {
     const [hasTranslation, setHasTranslation] = useState();
     const [passedVerify, setPassedVerify] = useState();
     const [hasMigrated, setHasMigrated] = useState();
-    const [url, setUrl] = useState();
 
     const navigate = useNavigate();
 
@@ -36,12 +35,12 @@ export default function UpdateProcess() {
                 setHasTranslation(res.data.hasTranslation)
                 setPassedVerify(res.data.passedVerify)
                 setHasMigrated(res.data.hasMigrated)
-                setUrl(res.data.url)
-
             })
             .catch(err => console.log(err))
 
     }, [])
+
+    const formattedURL = `https://valeofglamorgancouncil-customerportal.achieveservice.com/en/service/` + name.split(' ').join('_');
 
 
     return (
@@ -52,7 +51,7 @@ export default function UpdateProcess() {
                 <div className="my-3">
                     <h1>Process Details</h1>
                     <small>Process ID: {id}</small><br />
-                    <small>URL: <a href={url}>{url}</a></small>
+                    <small>URL: <a href={formattedURL}>{formattedURL}</a></small>
                 </div>
                 <table className="table">
                     <tbody>
