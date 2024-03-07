@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { MdFileDownloadDone } from "react-icons/md";
 
 export default function UpdateProcess() {
 
@@ -20,6 +21,7 @@ export default function UpdateProcess() {
     const [notes, setNotes] = useState([])
     const [user, setUser] = useState('')
     const [note, setNote] = useState('');
+    const [noteAdded, setNoteAdded] = useState(false);
 
     const navigate = useNavigate();
     let formattedDate = ''
@@ -60,14 +62,16 @@ export default function UpdateProcess() {
 
 
         setNotes((prevNotes) => [
-            ...prevNotes,
             {
                 date: formattedDate.toString(),
                 user: user,
                 content: note
-            }
+            },
+            ...prevNotes,
         ]
         )
+
+        setNoteAdded(true)
 
     }
 
@@ -212,7 +216,7 @@ export default function UpdateProcess() {
                             />
                             <label className="mx-2" htmlFor="passedVerify">Passed verification scripts</label>
                         </div>
-                        <div className="mb-2">
+                        <div className="">
                             <input
                                 type="checkbox"
                                 id="hasMigrated"
@@ -243,7 +247,7 @@ export default function UpdateProcess() {
                                 }}
                                     value={note} id="date" placeholder="" className="form-control w-md-50"></textarea>
                             </div>
-                            <button type="button" onClick={addNote}>Add note</button>
+                            {noteAdded ? <MdFileDownloadDone size={30} color='green' /> : <button type="button" onClick={addNote}>Add note</button>}
                         </div>
                     </div>
                 </div>
