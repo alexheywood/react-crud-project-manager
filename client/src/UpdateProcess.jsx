@@ -57,7 +57,7 @@ export default function UpdateProcess() {
         const mm = String(today.getMonth() + 1).padStart(2, '0'); // Month (January is 0)
         const yyyy = today.getFullYear(); // Year
 
-        formattedDate = mm + '/' + dd + '/' + yyyy;
+        formattedDate = dd + '/' + mm + '/' + yyyy;
         console.log('formatted date is: ' + formattedDate)
 
 
