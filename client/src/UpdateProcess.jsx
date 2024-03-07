@@ -17,8 +17,12 @@ export default function UpdateProcess() {
     const [hasTranslation, setHasTranslation] = useState(false);
     const [passedVerify, setPassedVerify] = useState(false);
     const [hasMigrated, setHasMigrated] = useState(false);
+    const [notes, setNotes] = useState([])
+    const [user, setUser] = useState('')
+    const [note, setNote] = useState('');
 
     const navigate = useNavigate();
+    let formattedDate = ''
 
     useEffect(() => {
         axios.get('http://localhost:3001/getProcess/' + id)
@@ -36,12 +40,39 @@ export default function UpdateProcess() {
                 setHasTranslation(res.data.hasTranslation)
                 setPassedVerify(res.data.passedVerify)
                 setHasMigrated(res.data.hasMigrated)
+                setNotes(res.data.notes)
 
             }).catch(err => console.log(err))
+
     }, [])
 
 
+    function addNote() {
+
+
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0'); // Day
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); // Month (January is 0)
+        const yyyy = today.getFullYear(); // Year
+
+        formattedDate = mm + '/' + dd + '/' + yyyy;
+        console.log('formatted date is: ' + formattedDate)
+
+
+        setNotes((prevNotes) => [
+            ...prevNotes,
+            {
+                date: formattedDate.toString(),
+                user: user,
+                content: note
+            }
+        ]
+        )
+
+    }
+
     function updateData(e) {
+
         e.preventDefault();
         axios.put("http://localhost:3001/updateProcess/" + id, {
             name,
@@ -54,7 +85,8 @@ export default function UpdateProcess() {
             hasContent,
             hasTranslation,
             passedVerify,
-            hasMigrated
+            hasMigrated,
+            notes
         })
             .then(res => {
                 console.log(res)
@@ -192,13 +224,34 @@ export default function UpdateProcess() {
                             <label className="mx-2" htmlFor="hasMigrated">Successfully migrated</label>
                         </div>
                     </div>
-
-
-                    <div className="d-flex my-3">
-                        <Link to="/" className="btn btn-danger">Cancel</Link>
-                        <button className="btn btn-large btn-success mx-2" type="submit">Submit</button>
+                </div>
+                <div className="row">
+                    <div className="col-12">
+                        <h3>Add note:</h3>
+                        <div className="mb-2">
+                            <div className="mb-2">
+                                <label htmlFor="user">User:</label>
+                                <input onChange={(e) => {
+                                    setUser(e.target.value)
+                                }}
+                                    value={user} id="user" type="text" placeholder="" className="form-control w-md-50"></input>
+                            </div>
+                            <div className="mb-2">
+                                <label htmlFor="note">Note:</label>
+                                <textarea onChange={(e) => {
+                                    setNote(e.target.value)
+                                }}
+                                    value={note} id="date" placeholder="" className="form-control w-md-50"></textarea>
+                            </div>
+                            <button type="button" onClick={addNote}>Add note</button>
+                        </div>
                     </div>
                 </div>
+                <div className="d-flex my-3">
+                    <Link to="/" className="btn btn-danger">Cancel</Link>
+                    <button className="btn btn-large btn-success mx-2" type="submit">Submit</button>
+                </div>
+
             </div>
         </form >
     )

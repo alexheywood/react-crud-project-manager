@@ -19,6 +19,8 @@ export default function Process() {
     const [hasTranslation, setHasTranslation] = useState();
     const [passedVerify, setPassedVerify] = useState();
     const [hasMigrated, setHasMigrated] = useState();
+    const [notes, setNotes] = useState([]);
+
 
     const navigate = useNavigate();
 
@@ -37,6 +39,7 @@ export default function Process() {
                 setHasTranslation(res.data.hasTranslation)
                 setPassedVerify(res.data.passedVerify)
                 setHasMigrated(res.data.hasMigrated)
+                setNotes(res.data.notes)
             })
             .catch(err => console.log(err))
 
@@ -56,7 +59,7 @@ export default function Process() {
                 </div>
             </div>
             <div className="row">
-                <div className=" col-12 col-md-6">
+                <div className="col-12 col-md-6">
                     <div className="mb-3">
                         <small>Process ID: {id}</small><br />
                         <small>URL: <a href={formattedURL}>{formattedURL}</a></small>
@@ -119,6 +122,36 @@ export default function Process() {
                     </table>
                 </div>
 
+            </div>
+
+            <div className="row mt-5">
+                <div className="col-12">
+                    <h3>Updates:</h3>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th className="col-2">Date</th>
+                                <th className="col-2">User</th>
+                                <th className="col-8">Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                notes.map((note) => {
+
+                                    return (
+                                        <tr key={note.date + note.user}>
+                                            <td>{note.date}</td>
+                                            <td>{note.user}</td>
+                                            <td>{note.content}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     )
