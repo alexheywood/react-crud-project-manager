@@ -85,9 +85,9 @@ export default function Process() {
                         </tbody>
                     </table>
                 </div>
-                <div className=" col-12 col-md-6">
+                <div className="col ">
                     <h3>Checklist:</h3>
-                    <table className="table">
+                    <table className="table col-6">
                         <tbody>
                             <tr>
                                 <th scope="row">Discovery completed?</th>
@@ -127,7 +127,7 @@ export default function Process() {
             <div className="row mt-5">
                 <div className="col-12">
                     <h3>Updates:</h3>
-                    <table className="table">
+                    <table className="table table-striped">
                         <thead>
                             <tr>
                                 <th className="col-2">Date</th>

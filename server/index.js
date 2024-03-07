@@ -74,7 +74,7 @@ app.put('/updateProcess/:id', (req, res) => {
             hasTranslation: req.body.hasTranslation,
             passedVerify: req.body.passedVerify,
             hasMigrated: req.body.hasMigrated,
-            complete: req.body.completed,
+            complete: req.body.complete,
             notes: req.body.notes
         })
         .then(process => {

@@ -12,7 +12,8 @@ const processSchema = new mongoose.Schema({
     hasTranslation: Boolean,
     passedVerify: Boolean,
     hasMigrated: Boolean,
-    notes: Array
+    notes: Array,
+    complete: Boolean
 })
 
 const processModel = mongoose.model("processes", processSchema)

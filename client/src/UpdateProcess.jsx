@@ -58,18 +58,20 @@ export default function UpdateProcess() {
         const yyyy = today.getFullYear(); // Year
 
         formattedDate = dd + '/' + mm + '/' + yyyy;
-        console.log('formatted date is: ' + formattedDate)
 
 
-        setNotes((prevNotes) => [
-            {
-                date: formattedDate.toString(),
-                user: user,
-                content: note
-            },
-            ...prevNotes,
-        ]
-        )
+        if (note) {
+
+            setNotes((prevNotes) => [
+                {
+                    date: formattedDate.toString(),
+                    user: user,
+                    content: note
+                },
+                ...prevNotes,
+            ]
+            )
+        }
 
         setNoteAdded(true)
 
@@ -90,7 +92,8 @@ export default function UpdateProcess() {
             hasTranslation,
             passedVerify,
             hasMigrated,
-            notes
+            notes,
+            complete
         })
             .then(res => {
                 console.log(res)
@@ -100,7 +103,7 @@ export default function UpdateProcess() {
     }
 
 
-
+    const complete = hasBuild && hasDiscovery && hasContent && hasTranslation && hasTests && hasMigrated && passedVerify
 
     return (
         <form onSubmit={updateData}>
