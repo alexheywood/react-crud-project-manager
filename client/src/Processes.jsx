@@ -5,14 +5,12 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { BsFillXCircleFill } from "react-icons/bs";
 import { MdModeEdit } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
-import PieChart from './PieChart';
 
 export default function Processes() {
 
     const [processList, setProcessList] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
-    const [completed, setCompleted] = useState(0);
-    const [incomplete, setIncomeplete] = useState(0);
+
 
     useEffect(() => {
         axios.get('http://localhost:3001/')
@@ -60,11 +58,8 @@ export default function Processes() {
         <>
 
             <div className="container">
-                {/* <div className="d-flex">
-                    <PieChart completed={completed} incomplete={incomplete} />
-                </div> */}
 
-                <h1 className='mt-5'>Process List</h1>
+                <h1 className='mt-5'>Projects List</h1>
                 <div className="d-flex row">
                     <div className="col">
                         <Link to="/create" className="btn btn-primary my-3">Create New</Link>

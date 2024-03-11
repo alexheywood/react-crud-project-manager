@@ -4,7 +4,7 @@ export default function Footer() {
 
     return (
         <nav className="navbar navbar-light bg-light text-center justify-content-center">
-            <small><a className="navbar-brand" href="#">Vale of Glamorgan Council</a></small>
+            <small><a className="navbar-brand" href="#">Organisation Name</a></small>
         </nav>
     )
 }

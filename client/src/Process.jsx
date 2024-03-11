@@ -45,7 +45,7 @@ export default function Process() {
 
     }, [])
 
-    const formattedURL = `https://valeofglamorgancouncil-customerportal.achieveservice.com/en/service/` + name.split(' ').join('_');
+    const formattedURL = `https://organization.com/` + name.split(' ').join('_');
 
 
     return (
@@ -55,7 +55,7 @@ export default function Process() {
             <Link to={`/update/${id}`} className="btn btn-success mx-4 btn-sm">Update</Link>
             <div className="row">
                 <div className="my-3">
-                    <h1>Process Details</h1>
+                    <h1>Project Details</h1>
                 </div>
             </div>
             <div className="row">
@@ -110,11 +110,11 @@ export default function Process() {
                                 <td>{hasTranslation ? <BsCheckCircleFill color='green' /> : <BsFillXCircleFill color='red' />}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Passed the verify script?</th>
+                                <th scope="row">Passed the security analysis?</th>
                                 <td>{passedVerify ? <BsCheckCircleFill color='green' /> : <BsFillXCircleFill color='red' />}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Has the process been successfully migrated?</th>
+                                <th scope="row">Has the process been successfully deployed?</th>
                                 <td>{hasMigrated ? <BsCheckCircleFill color='green' /> : <BsFillXCircleFill color='red' />}</td>
                             </tr>
 

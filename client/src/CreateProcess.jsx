@@ -64,10 +64,7 @@ export default function CreateProcess() {
                                     <label htmlFor="description">Description:</label>
                                     <input required onChange={(e) => setDescription(e.target.value)} id="description" type="text" placeholder="Process Description" className="form-control"></input>
                                 </div>
-                                {/* <div className="mb-2">
-                                <label htmlFor="url">URL:</label>
-                                <input onChange={(e) => setUrl(e.target.value)} type="text" id="url" placeholder="Granicus Form URL" className="form-control"></input>
-                            </div> */}
+
                                 <div className="mb-2">
                                     <label htmlFor="owner">Owner:</label>
                                     <input required onChange={(e) => setOwner(e.target.value)} id="owner" type="text" placeholder="Process Owner" className="form-control"></input>
@@ -75,13 +72,12 @@ export default function CreateProcess() {
                                 <div className="mb-2">
                                     <label className="d-block" htmlFor="">Service Area:</label>
                                     <select required onChange={(e) => setServiceArea(e.target.value)} className="w-100 p-1 rounded">
-                                        <option value="C1V">C1V</option>
-                                        <option value="Highways Management">Highways Maintenance</option>
-                                        <option value="Waste Management">Waste Management</option>
-                                        <option value="Benefits">Benefits</option>
-                                        <option value="Council Tax">Council Tax</option>
-                                        <option value="Social Services">Social Services</option>
-                                        <option value="Enforcement">Enforcement</option>
+                                        <option value="HR">HR</option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="Customer Relations">Customer Relations</option>
+                                        <option value="Research and Development">Research and Development</option>
+                                        <option value="Accounts">Accounts</option>
+                                        <option value="Audit">Audit</option>
                                     </select>
                                 </div>
                             </div>
@@ -137,7 +133,7 @@ export default function CreateProcess() {
                                     id="passedVerify"
                                     onChange={(e) => setPassedVerify(e.target.checked)}
                                 />
-                                <label className="mx-2" htmlFor="passedVerify">Passed verification scripts</label>
+                                <label className="mx-2" htmlFor="passedVerify">Passed security analysis</label>
                             </div>
                             <div className="mb-2">
                                 <input
@@ -145,7 +141,7 @@ export default function CreateProcess() {
                                     id="hasMigrated"
                                     onChange={(e) => setHasMigrated(e.target.checked)}
                                 />
-                                <label className="mx-2" htmlFor="hasMigrated">Successfully migrated</label>
+                                <label className="mx-2" htmlFor="hasMigrated">Successfully deployed</label>
                             </div>
                         </div>
 

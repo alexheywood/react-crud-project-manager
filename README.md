@@ -1,4 +1,4 @@
-# Granicus-Checklist
+# MERN-CRUD React Project Management App
 
 A full stack MERN app which helps users keep track of their ongoing projects.
 
@@ -9,45 +9,14 @@ Main features:
 - Leave updates on each process
 - Audit trail of users working on each task
 
+Technologies:
+- Client side React.js for front end
+- Express.js and Mongoose for middleware
+- Atlas DB (cloud hosted) document model DB.
+
 ## Run Locally
 
-Clone the project
+- Insert your Atlas DB connection string into .env file
+- npm run dev for client/
+- npm start for server/
 
-```bash
-  git clone https://stitchbird.valeofglamorgan.gov.uk/default/internal-apps/_git/granicus-checker
-```
-
-Go to the project directory
-
-```bash
-  cd prototype-crud
-```
-
-## Client
-
-Go to client directory
-```bash
-  cd client/
-```
-Install dependencies
-```bash
-  npm install
-```
-Start dev server
-```bash
-  npm run dev
-```
-
-## Server
-Go to server directory
-```bash
-  cd client/
-```
-Install NPM packages
-```bash
-  npm install
-```
-Run server
-```bash
-  npm start
-```
