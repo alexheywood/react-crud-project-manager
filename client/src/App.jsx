@@ -4,7 +4,6 @@ import CreateProcess from "./CreateProcess"
 import UpdateProcess from "./UpdateProcess"
 import Processes from "./Processes"
 import Header from "./Header"
-import Footer from "./Footer"
 import Process from "./Process"
 import NotFound from './NotFound'
 
